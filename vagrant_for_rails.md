@@ -35,6 +35,12 @@ ssh into the guest OS: `vagrant ssh`
 configure SElinux permissive mode by editing the config file `sudo vi /etc/selinux/config`
 and changing `enforcing` to `permissive`
 
+remove TTY requirement by editing `/etc/sudoers` with the command `sudo visudo` and commenting the following:
+```
+#Defaults    requiretty
+#Defaults   !visiblepw
+```
+
 reboot: `sudo reboot`
 
 log back in: `vagrant ssh`
