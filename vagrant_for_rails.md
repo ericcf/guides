@@ -45,6 +45,14 @@ reboot: `sudo reboot`
 
 log back in: `vagrant ssh`
 
+## Fix folder mounting
+
+`sudo ln -s /opt/VBoxGuestAdditions-4.3.18/lib/VBoxGuestAdditions /usr/lib/VBoxGuestAdditions`
+
+from the host: `vagrant plugin install vagrant-vbguest`
+
+`vagrant reload`
+
 ## Install PostgreSQL
 
 edit the CentOS-Base.repo file: `sudo vi /etc/yum.repos.d/CentOS-Base.repo`
