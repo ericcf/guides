@@ -36,14 +36,18 @@ Boot the VM image. Note: you will receive errors about a tty requirement. It's e
 $ vagrant up
 ```
 
+Configure SElinux permissive mode
+
+```
+$ vagrant ssh -c "sudo sed -i -e 's/^SELINUX=.*/SELINUX=permissive/' /etc/selinux/config"
+Connection to 127.0.0.1 closed.
+```
+
 SSH into the guest OS
 
 ```
 $ vagrant ssh
 ```
-
-Configure SElinux permissive mode by editing the config file `sudo vi /etc/selinux/config`
-and changing `enforcing` to `permissive`.
 
 Remove TTY requirement by editing `/etc/sudoers` with the command `sudo visudo` and commenting the following lines:
 
@@ -152,9 +156,9 @@ Install RVM stable with Ruby
 ## Install Phusion Passenger
 
 ```
-gem install passenger`
-
-`sudo chmod o+x "/home/vagrant"`
+gem install passenger
+sudo chmod o+x "/home/vagrant"
+```
 
 Temporarily increase available memory:
 
@@ -164,7 +168,9 @@ sudo mkswap /swap
 sudo swapon /swap
 ```
 
-`passenger-install-apache2-module`
+```
+passenger-install-apache2-module
+```
 
 add configuration file as instructed: `/etc/httpd/conf.d/passenger.conf`
 
