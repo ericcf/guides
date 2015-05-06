@@ -18,7 +18,7 @@ Download it here: https://dl.bintray.com/mitchellh/vagrant/vagrant_1.7.2.dmg
 
 Change to the directory where you'll store the configuration for your VM
 
-Download a CentOS 6.5 Vagrant box
+Download a CentOS 6.5 Vagrant box (this may take several minutes)
 
 ```
 $ vagrant box add vStone/centos-7.x-puppet.3.x
