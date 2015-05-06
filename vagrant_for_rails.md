@@ -2,11 +2,11 @@
 
 ## Install VirtualBox
 
-Download it here: http://download.virtualbox.org/virtualbox/4.3.24/VirtualBox-4.3.24-98716-OSX.dmg
+Download it here: http://dlc-cdn.sun.com/virtualbox/4.3.26/VirtualBox-4.3.26-98988-OSX.dmg
 
 Install VirtualBox and start the application
 
-Download the extension pack here: http://dlc-cdn.sun.com/virtualbox/4.3.24/Oracle_VM_VirtualBox_Extension_Pack-4.3.24.vbox-extpack
+Download the extension pack here: http://dlc-cdn.sun.com/virtualbox/4.3.26/Oracle_VM_VirtualBox_Extension_Pack-4.3.26-98988.vbox-extpack
 
 Double click the extension pack to install it
 
