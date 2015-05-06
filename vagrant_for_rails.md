@@ -22,18 +22,32 @@ Download a CentOS 6.5 Vagrant box (this may take several minutes)
 
 ```
 $ vagrant box add vStone/centos-7.x-puppet.3.x
+==> box: Loading metadata for box 'vStone/centos-7.x-puppet.3.x'
+    box: URL: https://atlas.hashicorp.com/vStone/centos-7.x-puppet.3.x
+==> box: Adding box 'vStone/centos-7.x-puppet.3.x' (v4.3.26.1) for provider: virtualbox
+    box: Downloading: https://atlas.hashicorp.com/vStone/boxes/centos-7.x-puppet.3.x/versions/4.3.26.1/providers/virtualbox.box
+==> box: Successfully added box 'vStone/centos-7.x-puppet.3.x' (v4.3.26.1) for 'virtualbox'!
 ```
 
 Download a `Vagrantfile`
 
 ```
 $ curl https://raw.githubusercontent.com/ericcf/guides/master/Vagrantfile > Vagrantfile
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100  3220  100  3220    0     0   1117      0  0:00:02  0:00:02 --:--:--  1117
 ```
 
 Boot the VM image. Note: you will receive errors about a tty requirement. It's expected!
 
 ```
 $ vagrant up
+...
+==> default: sudo: sorry, you must have a tty to run sudo
+The SSH command responded with a non-zero exit status. Vagrant
+assumes that this means the command failed. The output for this command
+should be in the log above. Please read the output to determine what
+went wrong.
 ```
 
 Configure SElinux permissive mode
@@ -47,6 +61,8 @@ SSH into the guest OS
 
 ```
 $ vagrant ssh
+Last login: Wed May  6 19:32:18 2015 from 10.0.2.2
+[vagrant@centos-7 ~]$
 ```
 
 Remove TTY requirement by editing `/etc/sudoers` with the command `sudo visudo` and commenting the following lines:
@@ -59,7 +75,7 @@ Remove TTY requirement by editing `/etc/sudoers` with the command `sudo visudo` 
 Fix folder mounting of Guest Additions
 
 ```
-[vagrant@centos-7 ~]$ sudo ln -s /opt/VBoxGuestAdditions-4.3.18/lib/VBoxGuestAdditions /usr/lib/VBoxGuestAdditions
+[vagrant@centos-7 ~]$ sudo ln -s /opt/VBoxGuestAdditions-4.3.24/lib/VBoxGuestAdditions /usr/lib/VBoxGuestAdditions
 ```
 
 Restart the vm and provision. This installs required packages and dependencies, and will take a while.
@@ -69,6 +85,8 @@ Restart the vm and provision. This installs required packages and dependencies, 
 logout
 Connection to 127.0.0.1 closed.
 $ vagrant reload --provision
+...
+==> default: Complete!
 ```
 
 Install a Vagrant plugin to keep Guest Additions up to date
