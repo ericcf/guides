@@ -93,6 +93,8 @@ Install a Vagrant plugin to keep Guest Additions up to date
 
 ```
 $ vagrant plugin install vagrant-vbguest
+Installing the 'vagrant-vbguest' plugin. This can take a few minutes...
+Installed the plugin 'vagrant-vbguest (0.10.0)'!
 $ vagrant reload
 ```
 
