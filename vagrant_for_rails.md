@@ -1,5 +1,7 @@
 # How to set up a Rails app development environment on OSX using Vagrant
 
+These instructions have been tested on 10.10.3 (Yosemite).
+
 ## Install VirtualBox
 
 Download it here: http://dlc-cdn.sun.com/virtualbox/4.3.26/VirtualBox-4.3.26-98988-OSX.dmg
@@ -113,19 +115,32 @@ Install Postgres dependencies
 
 ```
 [vagrant@centos-7 ~]$ sudo yum -y install http://yum.postgresql.org/9.4/redhat/rhel-6-x86_64/pgdg-redhat94-9.4-1.noarch.rpm
+...
+Installed:
+  pgdg-redhat94.noarch 0:9.4-1
+
+Complete!
 [vagrant@centos-7 ~]$ sudo yum -y install postgresql94-server postgresql94-contrib
+...
+Dependency Installed:
+  libxslt.x86_64 0:1.1.28-5.el7                           postgresql94.x86_64 0:9.4.1-1PGDG.rhel7                           postgresql94-libs.x86_64 0:9.4.1-1PGDG.rhel7
+
+Complete!
 ```
 
 Configure Postges to start when the server boots
 
 ```
 [vagrant@centos-7 ~]$ sudo systemctl enable postgresql-9.4
+ln -s '/usr/lib/systemd/system/postgresql-9.4.service' '/etc/systemd/system/multi-user.target.wants/postgresql-9.4.service'
 ```
 
 Start Postgres server
 
 ```
 [vagrant@centos-7 ~]$ sudo /usr/pgsql-9.4/bin/postgresql94-setup initdb
+Initializing database ... OK
+
 [vagrant@centos-7 ~]$ sudo systemctl start postgresql-9.4
 ```
 
@@ -149,47 +164,74 @@ Type "help" for help.
 postgres=#
 ```
 
+Type `\d` + `enter/return` or `control` + `d` to exit `psql`.
+
 ## Install RVM
 
 Install public key
 
 ```
 [vagrant@centos-7 ~]$ gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3
+...
+gpg:               imported: 1  (RSA: 1)
 ```
 
-Install RVM stable with Ruby
+Install RVM stable with Ruby (this will likely take several minutes)
 
 ```
-\curl -sSL https://get.rvm.io | bash -s stable --ruby
+[vagrant@centos-7 ~]$ \curl -sSL https://get.rvm.io | bash -s stable --ruby
+...
+  * To start using RVM you need to run `source /home/vagrant/.rvm/scripts/rvm`
+    in all your open shell windows, in rare cases you need to reopen all shell windows.
 ```
 
 ## Install NodeJS
 
-`wget http://nodejs.org/dist/v0.12.0/node-v0.12.0.tar.gz`
+```
+[vagrant@centos-7 ~]$ wget http://nodejs.org/dist/v0.12.0/node-v0.12.0.tar.gz
+...
+2015-05-07 12:48:29 (789 KB/s) - ‘node-v0.12.0.tar.gz’ saved [19096897/19096897]
 
-`tar xzvf node-v* && cd node-v*`
-
-`./configure; make`
-
-`sudo make install`
+[vagrant@centos-7 ~]$ tar xzvf node-v* && cd node-v*
+...
+node-v0.12.0/.gitattributes
+[vagrant@centos-7 node-v0.12.0]$ ./configure; make
+...
+ln -fs out/Release/node node
+[vagrant@centos-7 node-v0.12.0]$ sudo make install
+...
+installing /usr/local/include/node/zlib.h
+[vagrant@centos-7 node-v0.12.0]$ cd
+[vagrant@centos-7 ~]$
+```
 
 ## Install Phusion Passenger
 
 ```
-gem install passenger
-sudo chmod o+x "/home/vagrant"
+[vagrant@centos-7 ~]$ gem install passenger
+...
+2 gems installed
+[vagrant@centos-7 ~]$ sudo chmod o+x "/home/vagrant"
 ```
 
 Temporarily increase available memory:
 
 ```
-sudo dd if=/dev/zero of=/swap bs=1M count=1024
-sudo mkswap /swap
-sudo swapon /swap
-```
+[vagrant@centos-7 ~]$ sudo dd if=/dev/zero of=/swap bs=1M count=1024
+...
+1073741824 bytes (1.1 GB) copied, 1.97347 s, 544 MB/s
+[vagrant@centos-7 ~]$ sudo mkswap /swap
+Setting up swapspace version 1, size = 1048572 KiB
+no label, UUID=104e8f43-3891-44d5-9057-9f5d6c79041f
+[vagrant@centos-7 ~]$ sudo swapon /swap
+swapon: /swap: insecure permissions 0644, 0600 suggested.
 
 ```
-passenger-install-apache2-module
+
+Run Passenger installation, and follow the instructions (this will take several minutes)
+
+```
+[vagrant@centos-7 ~]$ passenger-install-apache2-module
 ```
 
 add configuration file as instructed: `/etc/httpd/conf.d/passenger.conf`
@@ -197,6 +239,6 @@ add configuration file as instructed: `/etc/httpd/conf.d/passenger.conf`
 ## Configure and start Apache
 
 ```
-sudo systemctl enable httpd
-sudo systemctl start httpd
+[vagrant@centos-7 ~]$ sudo systemctl enable httpd
+[vagrant@centos-7 ~]$ sudo systemctl start httpd
 ````
