@@ -247,10 +247,11 @@ add configuration file as instructed: `/etc/httpd/conf.d/passenger.conf`
 
 ```
 [vagrant@centos-7 ~]$ rm -rf node-*
-``
+```
 
 ## Install Rails
 
 ```
-gem install rails
+[vagrant@centos-7 ~]$ echo "gem: --no-document" > ~/.gemrc
+[vagrant@centos-7 ~]$ gem install rails
 ```
