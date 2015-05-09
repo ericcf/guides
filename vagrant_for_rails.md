@@ -255,3 +255,7 @@ add configuration file as instructed: `/etc/httpd/conf.d/passenger.conf`
 [vagrant@centos-7 ~]$ echo "gem: --no-document" > ~/.gemrc
 [vagrant@centos-7 ~]$ gem install rails
 ```
+
+## Set up port forwarding
+
+[Follow these instructions](https://gist.github.com/altryne/60693da48d1b776c8265)
