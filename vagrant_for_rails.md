@@ -242,3 +242,15 @@ add configuration file as instructed: `/etc/httpd/conf.d/passenger.conf`
 [vagrant@centos-7 ~]$ sudo systemctl enable httpd
 [vagrant@centos-7 ~]$ sudo systemctl start httpd
 ````
+
+## Clean up
+
+```
+[vagrant@centos-7 ~]$ rm -rf node-*
+``
+
+## Install Rails
+
+```
+gem install rails
+```
